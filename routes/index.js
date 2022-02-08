@@ -9,7 +9,7 @@ let IMAGE_BASE
 let IMAGE_SIZE
 let pageNumber = Math.floor(Math.random() * 500) + 1
 
-const config = async () => {
+async function config() {
   const configReply = await fetch(`https://api.themoviedb.org/3/configuration?api_key=${apiKey}`,
     { method: 'GET' }
     
