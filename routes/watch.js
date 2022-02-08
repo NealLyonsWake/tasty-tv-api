@@ -47,13 +47,13 @@ router.post('/requestmovie', async function (req, res) {
         }
 
         catch (e) {
-            console.log(e, "Error connecting to server", "Blimpy Blip Jop!")
+            console.log(e, "Error connecting to server")
         }
 
     }
     else {
         res.status(401).json({
-            message: "Need to sign in!"
+            message: "Oops! It looks like you need to sign in!"
         })
     }
 })
@@ -115,12 +115,12 @@ router.get('/requestwatchlist', async (req, res) => {
         }
 
         catch (e) {
-            console.log(e, "Error connecting to server", "Blimpy Blip Jop!")
+            console.log(e, "Error connecting to server")
         }
     }
     else {
         res.status(401).json({
-            message: "Need to sign in!"
+            message: "Oops! It looks like you need to sign in!"
         })
     }
 })
@@ -165,12 +165,12 @@ router.delete('/requestdeletesingle/:id', async (req, res) => {
         }
 
         catch (e) {
-            console.log(e, "Error connecting to server", "Blimpy Blip Jop!")
+            console.log(e, "Error connecting to server")
         }
     }
     else {
         res.status(401).json({
-            message: "Need to sign in!"
+            message: "Oops! It looks like you need to sign in!"
         })
     }
 })
@@ -215,12 +215,12 @@ router.delete('/requestdeleteall', async (req, res) => {
         }
 
         catch (e) {
-            console.log(e, "Error connecting to server", "Blimpy Blip Jop!")
+            console.log(e, "Error connecting to server")
         }
     }
     else {
         res.status(401).json({
-            message: "Need to sign in!"
+            message: "Oops! It looks like you need to sign in!"
         })
     }
 })
@@ -271,12 +271,12 @@ router.patch('/requestcheckwatched/:id', async (req, res) => {
         }
 
         catch (e) {
-            console.log(e, "Error connecting to server", "Blimpy Blip Jop!")
+            console.log(e, "Error connecting to server")
         }
     }
     else {
         res.status(401).json({
-            message: "Need to sign in!"
+            message: "Oops! It looks like you need to sign in!"
         })
     }
 })
@@ -334,12 +334,12 @@ router.delete('/requestremovewatched', async (req, res) => {
         }
 
         catch (e) {
-            console.log(e, "Error connecting to server", "Blimpy Blip Jop!")
+            console.log(e, "Error connecting to server")
         }
     }
     else {
         res.status(401).json({
-            message: "Need to sign in!"
+            message: "Oops! It looks like you need to sign in!"
         })
     }
 })

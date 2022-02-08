@@ -44,13 +44,13 @@ router.post('/requestcomment', async function (req, res) {
         }
 
         catch (e) {
-            console.log(e, "Error connecting to server", "Blimpy Blip Jop!")
+            console.log(e, "Error connecting to server")
         }
 
     }
     else {
         res.status(401).json({
-            message: "Need to sign in!"
+            message: "Oops! It looks like you need to sign in!"
         })
     }
 })
@@ -97,12 +97,12 @@ router.post('/addcomment', passport.authenticate("jwt", { session: false }), asy
             }
     
             catch (e) {
-                console.log(e, "Error connecting to server", "Blimpy Blip Jop!")
+                console.log(e, "Error connecting to server")
             }
         }
         else {
             res.status(401).json({
-                message: "Need to sign in!"
+                message: "Oops! It looks like you need to sign in!"
             })
         }
     })

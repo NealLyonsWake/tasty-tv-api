@@ -1,23 +1,25 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+require('dotenv').config()
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const passport = require('passport');
 const cors = require('cors')
 const mongoose = require('mongoose')
 
 require('./middleware/auth')
 
-mongoose.connect('mongodb://127.0.0.1:27017/tasty-tv')
+const mongooseURI = process.env.MONGODB
+mongoose.connect(mongooseURI)
 
-var indexRouter = require('./routes/index');
-var accountRouter = require('./routes/account');
-var watchRouter = require('./routes/watch');
-var reviewRouter = require('./routes/reviews')
-var commentRouter = require('./routes/comments')
+const indexRouter = require('./routes/index');
+const accountRouter = require('./routes/account');
+const watchRouter = require('./routes/watch');
+const reviewRouter = require('./routes/reviews')
+const commentRouter = require('./routes/comments')
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -44,7 +46,6 @@ app.use('/review', reviewRouter);
 app.use('/comment', commentRouter);
 
 app.use(passport.initialize)
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,3 +1,4 @@
+require('dotenv').config()
 const passport = require('passport');
 const passportJWT = require('passport-jwt');
 const { User } = require('../models/user')
@@ -7,7 +8,7 @@ let JwtStrategy = passportJWT.Strategy
 
 let jwtOptions = {
   jwtFromRequest: ExtractJWT.fromAuthHeaderWithScheme("jwt"),
-  secretOrKey: "secretSquirrel"
+  secretOrKey: process.env.SECRET
 }
 
 let strategy = new JwtStrategy(

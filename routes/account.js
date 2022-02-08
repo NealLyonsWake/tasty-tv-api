@@ -1,3 +1,4 @@
+require('dotenv').config()
 var express = require('express');
 const jwt = require('jsonwebtoken');
 // const passport = require('passport')
@@ -5,7 +6,7 @@ const jwt = require('jsonwebtoken');
 var router = express.Router();
 const { User } = require('../models/user')
 
-let jwtOptions = { secretOrKey: "secretSquirrel" }
+let jwtOptions = { secretOrKey: process.env.SECRET } 
 
 // register
 router.post('/register', (req, res) => {
@@ -28,15 +29,15 @@ router.post('/register', (req, res) => {
               if (err) {
                 res.status(401).json(err)
               } else {
-                res.status(201).json({ message: "registration successful." });
+                res.status(201).json({ message: "Registration successful." });
               }
             });
         } else {
-          res.status(401).json({ message: "already registered username." });
+          res.status(401).json({ message: "Already registered username." });
         }
       });
   } else {
-    res.status(401).json({ message: "email and password required." });
+    res.status(401).json({ message: "Email and password required." });
   }
 });
 
@@ -54,7 +55,7 @@ router.post("/login", function (req, res, next) {
           res.status(401).json(err);
         } else if (!user) {
           return res.status(401).json({
-            message: "user not registered."
+            message: "User not registered."
           });
         }
 
@@ -72,34 +73,28 @@ router.post("/login", function (req, res, next) {
                 httpOnly: true,
                 path: '/',
                 secure: true,
-                expires: new Date(new Date().getTime() + 20 * 100000)
+                expires: new Date(new Date().getTime() + 60 * 60 * 1000)
               })
 
               res.cookie('user', user.username, {
                 httpOnly: false,
                 path: '/',
                 secure: true,
-                expires: new Date(new Date().getTime() + 20 * 100000)
+                expires: new Date(new Date().getTime() + 60 * 60 * 1000)
               })
 
               return res.redirect('/account/welcome')
-
-              // res.status(200).json({
-              //   message: "login successful.",
-              //   token: token,
-              //   id: user.id
-
-              // });
+          
             } else {
               res.status(401).json({
-                message: "invalid password."
+                message: "Invalid password."
               });
             }
           });
       });
   } else {
     res.status(401).json({
-      message: "missing username or password."
+      message: "Missing username or password."
     });
   }
   

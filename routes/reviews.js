@@ -53,7 +53,7 @@ router.post('/requestreview', async function (req, res) {
             }
 
             catch (e) {
-                console.log(e, "Error connecting to server", "Blimpy Blip Jop!")
+                console.log(e, "Error connecting to server")
             }
         }
 
@@ -83,14 +83,14 @@ router.post('/requestreview', async function (req, res) {
             }
 
             catch (e) {
-                console.log(e, "Error connecting to server", "Blimpy Blip Jop!")
+                console.log(e, "Error connecting to server")
             }
 
         }
     }
     else {
         res.status(401).json({
-            message: "Need to sign in!"
+            message: "Oops! It looks like you need to sign in!"
         })
     }
 })
@@ -138,7 +138,7 @@ router.post('/addreview', passport.authenticate("jwt", { session: false }), asyn
             }
 
             catch (e) {
-                console.log(e, "Error connecting to server", "Blimpy Blip Jop!")
+                console.log(e, "Error connecting to server")
             }
 
         // res.status(200).json({ message: review.review });
@@ -184,7 +184,7 @@ router.patch('/amendreview/:id/:author', passport.authenticate("jwt", { session:
         }
 
         catch (e) {
-            console.log(e, "Error connecting to server", "Blimpy Blip Jop!")
+            console.log(e, "Error connecting to server")
         }
     }
     catch {
@@ -219,12 +219,12 @@ router.get('/requestreviews', async (req, res) => {
         }
 
         catch (e) {
-            console.log(e, "Error connecting to server", "Blimpy Blip Jop!")
+            console.log(e, "Error connecting to server")
         }
     }
     else {
         res.status(401).json({
-            message: "Need to sign in!"
+            message: "Oops! It looks like you need to sign in!"
         })
     }
 })
