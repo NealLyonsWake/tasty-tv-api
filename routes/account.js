@@ -1,9 +1,8 @@
 require('dotenv').config()
-var express = require('express');
+const express = require('express');
 const jwt = require('jsonwebtoken');
-// const passport = require('passport')
-// const passportJWT = require('passport-jwt');
-var router = express.Router();
+const router = express.Router();
+const { serialize } = require('cookie')
 const { User } = require('../models/user')
 
 let jwtOptions = { secretOrKey: process.env.SECRET } 
@@ -73,23 +72,46 @@ router.post("/login", (req, res, next) => {
               const payload = { id: user.id };
               const token = jwt.sign(payload, jwtOptions.secretOrKey, { expiresIn: '1h' });
 
-              res
-              .cookie('token', token, {
+              const serialisedToken = serialize('token', token,
+              {
                 httpOnly: true,
                 path: '/',
                 secure: true,
-                sameSite: "None",
-                // domain: "https://tasty-tv-frontend.herokuapp.com/",
+                sameSite: "lax",
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-              })              
-              .cookie('user', user.username, {
-                httpOnly: false,
+              })
+
+              const serialisedUser = serialize('user', user.username,
+              {
+                httpOnly: true,
                 path: '/',
                 secure: true,
-                sameSite: "None",
-                // domain: "https://tasty-tv-frontend.herokuapp.com/",
+                sameSite: "lax",
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-              });
+              })
+          
+            res
+            .setHeader('Set-Cookie', serialisedToken)
+            .setHeader('Set-Cookie', serialisedUser)
+
+
+              // res
+              // .cookie('token', token, {
+              //   httpOnly: true,
+              //   path: '/',
+              //   secure: true,
+              //   sameSite: "lax",
+              //   // domain: "https://tasty-tv-frontend.herokuapp.com/",
+              //   expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+              // })              
+              // .cookie('user', user.username, {
+              //   httpOnly: false,
+              //   path: '/',
+              //   secure: true,
+              //   sameSite: "lax",
+              //   // domain: "https://tasty-tv-frontend.herokuapp.com/",
+              //   expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+              // });
             
             return res.redirect('/account/welcome');
 
@@ -119,6 +141,7 @@ router.get("/welcome", (req, res) => {
   const { cookies } = req
   const jwt = cookies.token
   const user = cookies.user  
+  console.log(user)
 
   return res.status(202).json({ 
     user: user,
