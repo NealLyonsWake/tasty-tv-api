@@ -27,7 +27,7 @@ app.set('view engine', 'jade');
 
 app.use(
   cors({
-    credentials: true,
+    credentials: include,
     origin: 'https://tasty-tv-frontend.herokuapp.com'
   }
   )
