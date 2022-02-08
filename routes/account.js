@@ -67,28 +67,34 @@ router.post("/login", (req, res, next) => {
             }
             
             if (user) {
+
+              try{
               
               const payload = { id: user.id };
               const token = jwt.sign(payload, jwtOptions.secretOrKey, { expiresIn: '1h' });
 
-              res.cookie('token', token, {
+              res
+              .cookie('token', token, {
                 httpOnly: true,
                 path: '/',
                 secure: true,
-                sameSite: "lax",
+                sameSite: "none",
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-              });
-
-              res.cookie('user', user.username, {
+              })              
+              .cookie('user', user.username, {
                 httpOnly: false,
                 path: '/',
                 secure: true,
-                sameSite: "lax",
+                sameSite: "none",
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
               });
+            
+            return res.redirect('/account/welcome');
 
-              return res.redirect('/account/welcome');
-              
+            }
+            catch (e){
+              return res.json({error: e})
+            }
             
 
             } else {
