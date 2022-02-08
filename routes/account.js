@@ -73,6 +73,8 @@ router.post("/login", function (req, res, next) {
                 httpOnly: true,
                 path: '/',
                 secure: true,
+                sameSite: 'none',
+                proxy: true,
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
               })
 
@@ -80,6 +82,8 @@ router.post("/login", function (req, res, next) {
                 httpOnly: false,
                 path: '/',
                 secure: true,
+                sameSite: 'none',
+                proxy: true,
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
               })
 
