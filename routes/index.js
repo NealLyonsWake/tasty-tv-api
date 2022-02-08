@@ -12,6 +12,7 @@ let pageNumber = Math.floor(Math.random() * 500) + 1
 const config = async () => {
   const configReply = await fetch(`https://api.themoviedb.org/3/configuration?api_key=${apiKey}`,
     { method: 'GET' }
+    
   )
   const configReplyJSON = await configReply.json()
   const images = configReplyJSON.images
@@ -22,11 +23,11 @@ const config = async () => {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Neal`s ISDB API' });
+  res.render('index', { title: 'Tasty TV API' });
 });
 
 router.get(`/recommend`, async function (req, res) {
-  config()
+  await config()
   const movieReply = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&certification_country=GB&certification.lte=18&include_adult=false&include_video=false&page=${pageNumber}&with_watch_monetization_types=flatrate`,
     { method: 'GET' }
