@@ -7,6 +7,7 @@ const logger = require('morgan');
 const passport = require('passport');
 const cors = require('cors')
 const mongoose = require('mongoose')
+const session = require('express-session')
 
 require('./middleware/auth')
 
@@ -18,22 +19,30 @@ const accountRouter = require('./routes/account');
 const watchRouter = require('./routes/watch');
 const reviewRouter = require('./routes/reviews')
 const commentRouter = require('./routes/comments');
-const { session } = require('passport');
 
 const app = express();
+
+app.use(session({
+  resave: false,
+  secret: process.env.SECRETCOOKIE,
+  saveUninitialized: true,
+  proxy: true,
+  cookie: {
+    secure: true,
+  }
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set('trust proxy', 1)
 
-
 app.use(
   cors(
     {
-    credentials: true,
-    origin: 'https://tasty-tv-frontend.herokuapp.com'
-  }
+      credentials: true,
+      origin: 'https://tasty-tv-frontend.herokuapp.com'
+    }
   )
 )
 
@@ -55,12 +64,12 @@ app.use(passport.initialize)
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
