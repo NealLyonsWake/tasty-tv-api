@@ -24,6 +24,7 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.set('trust proxy', 1)
 
 app.use(
   cors(
@@ -45,6 +46,8 @@ app.use('/account', accountRouter);
 app.use('/watch', watchRouter);
 app.use('/review', reviewRouter);
 app.use('/comment', commentRouter);
+
+
 
 app.use(passport.initialize)
 
