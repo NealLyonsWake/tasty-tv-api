@@ -1,9 +1,9 @@
 require('dotenv').config()
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
-const apiKey = process.env.API_KEY
+// const apiKey = process.env.API_KEY
 
 // let IMAGE_BASE
 // let IMAGE_SIZE
@@ -29,6 +29,7 @@ router.get('/', function (req, res, next) {
 
 router.get(`/recommend`, async function (req, res) {
   // await config()
+  const apiKey = process.env.API_KEY
 
   let IMAGE_BASE
   let IMAGE_SIZE
@@ -68,9 +69,9 @@ router.get(`/recommend`, async function (req, res) {
 
   catch (e) {
     console.log(e)
-    res.json({ message: 'Call to movie API failed' })
+    res.json({ message: 'Call to movie API failed', e })
   }
-  
+
 });
 
 
