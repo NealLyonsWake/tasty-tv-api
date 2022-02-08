@@ -12,7 +12,7 @@ router.use(usersRouter)
 
 router.post('/requestmovie', async function (req, res) {
 
-    const endpoint = "http://localhost:4000/watch/addmovie"
+    const endpoint = "https://tasty-tv-api.herokuapp.com/watch/addmovie"
     const { cookies } = req
     const jwt = cookies.token
     const user = cookies.user
@@ -92,7 +92,7 @@ router.post('/addmovie', passport.authenticate("jwt", { session: false }), async
 })
 
 router.get('/requestwatchlist', async (req, res) => {
-    const endpoint = "http://localhost:4000/watch/getwatchlist/"
+    const endpoint = "https://tasty-tv-api.herokuapp.com/watch/getwatchlist/"
     const { cookies } = req
     const jwt = cookies.token
     const user = cookies.user
@@ -141,7 +141,7 @@ router.get('/getwatchlist/:user', passport.authenticate("jwt", { session: false 
 });
 
 router.delete('/requestdeletesingle/:id', async (req, res) => {
-    const endpoint = "http://localhost:4000/watch/deletesingle/"
+    const endpoint = "https://tasty-tv-api.herokuapp.com/watch/deletesingle/"
     const { cookies } = req
     const jwt = cookies.token
     const user = cookies.user
@@ -192,7 +192,7 @@ router.delete('/deletesingle/:id/:user', passport.authenticate("jwt", { session:
 });
 
 router.delete('/requestdeleteall', async (req, res) => {
-    const endpoint = "http://localhost:4000/watch/deleteall/"
+    const endpoint = "https://tasty-tv-api.herokuapp.com/watch/deleteall/"
     const { cookies } = req
     const jwt = cookies.token
     const user = cookies.user
@@ -243,7 +243,7 @@ router.delete('/deleteall/:user', passport.authenticate("jwt", { session: false 
 
 
 router.patch('/requestcheckwatched/:id', async (req, res) => {
-    const endpoint = "http://localhost:4000/watch/checkwatched/"
+    const endpoint = "https://tasty-tv-api.herokuapp.com/watch/checkwatched/"
     const { cookies } = req
     const jwt = cookies.token
     const user = cookies.user
@@ -311,7 +311,7 @@ router.patch('/updatereview/:id/:user', async function (req, res) {
 
 
 router.delete('/requestremovewatched', async (req, res) => {
-    const endpoint = "http://localhost:4000/watch/removewatched/"
+    const endpoint = "https://tasty-tv-api.herokuapp.com/watch/removewatched/"
     const { cookies } = req
     const jwt = cookies.token
     const user = cookies.user

@@ -18,7 +18,7 @@ router.post('/requestcomment', async function (req, res) {
 
     if (jwt && user) {
 
-        const endpoint = "http://localhost:4000/comment/addcomment"
+        const endpoint = "https://tasty-tv-api.herokuapp.com/comment/addcomment"
 
         const requestOptions = {
             method: 'POST',
@@ -75,7 +75,7 @@ router.post('/addcomment', passport.authenticate("jwt", { session: false }), asy
     })
 
     router.get('/requestretrievecomments/:_id', async (req, res) => {
-        const endpoint = "http://localhost:4000/comment/retrievecomments/"
+        const endpoint = "https://tasty-tv-api.herokuapp.com/comment/retrievecomments/"
         const { cookies } = req
         const jwt = cookies.token
            
