@@ -25,27 +25,14 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-const whitelist = ["http://localhost:3000", "https://tasty-tv-api.herokuapp.com"]
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error("Not allowed by CORS"))
-    }
-  },
-  credentials: true,
-}
-app.use(cors(corsOptions))
-
-// app.use(
-//   cors(
-//     {
-//     credentials: true,
-//     origin: 'http://localhost:3000'
-//   }
-//   )
-// )
+app.use(
+  cors(
+    {
+    credentials: true,
+    origin: 'http://localhost:3000'
+  }
+  )
+)
 
 app.use(logger('dev'));
 app.use(express.json());

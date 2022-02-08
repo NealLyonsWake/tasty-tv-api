@@ -20,6 +20,11 @@ const config = async () => {
   IMAGE_SIZE = poster_sizes[2]
 }
 
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Neal`s ISDB API' });
+});
+
 router.get(`/recommend`, async function (req, res) {
   config()
   const movieReply = await fetch(
