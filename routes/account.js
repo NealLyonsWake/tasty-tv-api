@@ -43,13 +43,13 @@ router.post('/register', (req, res) => {
 
 
 // login
-router.post("/login", function (req, res, next) {
+router.post("/login", async (req, res, next) => {
   if (req.body.username && req.body.password) {
     const username = req.body.username;
     const password = req.body.password;
 
     // authenticate
-    User.findOne({ username: username },
+    await User.findOne({ username: username },
       function (err, user) {
         if (err) {
           res.status(401).json(err);
@@ -61,11 +61,13 @@ router.post("/login", function (req, res, next) {
 
         user.authenticate(
           password,
-          function (err, user) {
+          (err, user) => {
             if (err) {
-              res.status(401).json(err)
+              res.status(401).json(err);
             }
+            
             if (user) {
+              try{
               const payload = { id: user.id };
               const token = jwt.sign(payload, jwtOptions.secretOrKey, { expiresIn: '1h' });
 
@@ -76,7 +78,7 @@ router.post("/login", function (req, res, next) {
                 sameSite: 'none',
                 proxy: true,
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-              })
+              });
 
               res.cookie('user', user.username, {
                 httpOnly: false,
@@ -85,10 +87,15 @@ router.post("/login", function (req, res, next) {
                 sameSite: 'none',
                 proxy: true,
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-              })
+              });
 
-              return res.redirect('/account/welcome')
-          
+              return res.redirect('/account/welcome');
+            }
+            catch (e){
+              return res.json({message: e})
+            }
+            
+
             } else {
               res.status(401).json({
                 message: "Invalid password."
@@ -108,13 +115,12 @@ router.get("/welcome", (req, res) => {
   
   const { cookies } = req
   const jwt = cookies.token
-  const user = cookies.user
-  
-  
+  const user = cookies.user  
 
   return res.status(202).json({ 
     user: user,
     loggedIn: jwt? true : false})
+
 })
 
 
