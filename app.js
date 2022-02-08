@@ -17,7 +17,8 @@ const indexRouter = require('./routes/index');
 const accountRouter = require('./routes/account');
 const watchRouter = require('./routes/watch');
 const reviewRouter = require('./routes/reviews')
-const commentRouter = require('./routes/comments')
+const commentRouter = require('./routes/comments');
+const { session } = require('passport');
 
 const app = express();
 
@@ -25,6 +26,14 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set('trust proxy', 1)
+app.use(
+  session({
+    cookie:{
+      sameSite: 'none',
+      secure: true
+    }
+  })
+)
 
 app.use(
   cors(
