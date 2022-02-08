@@ -43,13 +43,13 @@ router.post('/register', (req, res) => {
 
 
 // login
-router.post("/login", async (req, res, next) => {
+router.post("/login", (req, res, next) => {
   if (req.body.username && req.body.password) {
     const username = req.body.username;
     const password = req.body.password;
 
     // authenticate
-    await User.findOne({ username: username },
+  User.findOne({ username: username },
       function (err, user) {
         if (err) {
           res.status(401).json(err);
@@ -76,7 +76,6 @@ router.post("/login", async (req, res, next) => {
                 path: '/',
                 secure: true,
                 sameSite: 'none',
-                proxy: true,
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
               });
 
@@ -85,7 +84,6 @@ router.post("/login", async (req, res, next) => {
                 path: '/',
                 secure: true,
                 sameSite: 'none',
-                proxy: true,
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
               });
 
