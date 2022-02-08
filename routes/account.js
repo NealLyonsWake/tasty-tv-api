@@ -67,7 +67,7 @@ router.post("/login", (req, res, next) => {
             }
             
             if (user) {
-              try{
+              
               const payload = { id: user.id };
               const token = jwt.sign(payload, jwtOptions.secretOrKey, { expiresIn: '1h' });
 
@@ -75,7 +75,7 @@ router.post("/login", (req, res, next) => {
                 httpOnly: true,
                 path: '/',
                 secure: true,
-                sameSite: 'none',
+                sameSite: "none",
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
               });
 
@@ -83,15 +83,12 @@ router.post("/login", (req, res, next) => {
                 httpOnly: false,
                 path: '/',
                 secure: true,
-                sameSite: 'none',
+                sameSite: "none",
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
               });
 
               return res.redirect('/account/welcome');
-            }
-            catch (e){
-              return res.json({message: e})
-            }
+              
             
 
             } else {
