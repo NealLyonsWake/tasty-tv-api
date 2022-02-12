@@ -107,7 +107,7 @@ router.post('/addcomment', passport.authenticate("jwt", { session: false }), asy
         }
     })
     
-    router.get('/retrievecomments/:_id', passport.authenticate("jwt", { session: false }), async function (req, res) {
+    router.get('/retrievecomments/:_id', passport.authenticate("jwt", { session:false  }), async function (req, res) {
     
         try {
             const comments = await Comment.find({ commentId: req.params._id });

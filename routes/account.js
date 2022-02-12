@@ -72,27 +72,32 @@ router.post("/login", (req, res, next) => {
               const payload = { id: user.id };
               const token = jwt.sign(payload, jwtOptions.secretOrKey, { expiresIn: '1h' });
 
-              const serialisedToken = serialize('token', token,
-              {
-                httpOnly: true,
-                path: '/',
-                secure: true,
-                sameSite: "lax",
-                expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-              })
+              res.status(202).json({ 
+                user: user,
+                token: token
+              })         
 
-              const serialisedUser = serialize('user', user.username,
-              {
-                httpOnly: true,
-                path: '/',
-                secure: true,
-                sameSite: "lax",
-                expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-              })
+            //   const serialisedToken = serialize('token', token,
+            //   {
+            //     httpOnly: true,
+            //     path: '/',
+            //     secure: true,
+            //     sameSite: "lax",
+            //     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+            //   })
+
+            //   const serialisedUser = serialize('user', user.username,
+            //   {
+            //     httpOnly: true,
+            //     path: '/',
+            //     secure: true,
+            //     sameSite: "lax",
+            //     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+            //   })
           
-            res
-            .setHeader('Set-Cookie', serialisedToken)
-            .setHeader('Set-Cookie', serialisedUser)
+            // res
+            // .setHeader('Set-Cookie', serialisedToken)
+            // .setHeader('Set-Cookie', serialisedUser)
 
 
               // res
@@ -113,7 +118,7 @@ router.post("/login", (req, res, next) => {
               //   expires: new Date(new Date().getTime() + 60 * 60 * 1000)
               // });
             
-            return res.redirect('/account/welcome');
+            // return res.redirect('/account/welcome');
 
             }
             catch (e){
