@@ -72,10 +72,10 @@ router.post("/login", (req, res, next) => {
               const payload = { id: user.id };
               const token = jwt.sign(payload, jwtOptions.secretOrKey, { expiresIn: '1h' });
 
-              res.status(202).json({ 
-                user: user,
-                token: token
-              })         
+              // res.status(202).json({ 
+              //   user: user,
+              //   token: token
+              // })         
 
             //   const serialisedToken = serialize('token', token,
             //   {
@@ -100,25 +100,25 @@ router.post("/login", (req, res, next) => {
             // .setHeader('Set-Cookie', serialisedUser)
 
 
-              // res
-              // .cookie('token', token, {
-              //   httpOnly: true,
-              //   path: '/',
-              //   secure: true,
-              //   sameSite: "lax",
-              //   // domain: "https://tasty-tv-frontend.herokuapp.com/",
-              //   expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-              // })              
-              // .cookie('user', user.username, {
-              //   httpOnly: false,
-              //   path: '/',
-              //   secure: true,
-              //   sameSite: "lax",
-              //   // domain: "https://tasty-tv-frontend.herokuapp.com/",
-              //   expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-              // });
+              res
+              .cookie('token', token, {
+                httpOnly: true,
+                path: '/',
+                secure: true,
+                sameSite: "lax",
+                domain: "https://tasty-tv-frontend.herokuapp.com/",
+                expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+              })              
+              .cookie('user', user.username, {
+                httpOnly: false,
+                path: '/',
+                secure: true,
+                sameSite: "lax",
+                domain: "https://tasty-tv-frontend.herokuapp.com/",
+                expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+              });
             
-            // return res.redirect('/account/welcome');
+            return res.redirect('/account/welcome');
 
             }
             catch (e){
