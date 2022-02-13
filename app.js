@@ -33,7 +33,7 @@ app.use(
   cors(
     {
       credentials: true,
-      origin: 'https://tasty-tv-frontend.herokuapp.com'
+      origin: 'https://tasty-tv.netlify.app/'
     }
   )
 )
@@ -43,19 +43,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-  name: "tv_session",
-  secret: process.env.SECRETCOOKIE,
-  resave: false,
-  saveUninitialized: false,
-  proxy: true,
-  cookie: {
-    path: "/",
-    secure: true,
-    domain: "tasty-tv-frontend.herokuapp.com",
-    httpOnly: true
-  }
-}));
+// app.use(session({
+//   name: "tv_session",
+//   secret: process.env.SECRETCOOKIE,
+//   resave: false,
+//   saveUninitialized: false,
+//   proxy: true,
+//   cookie: {
+//     path: "/",
+//     secure: true,
+//     domain: "tasty-tv-frontend.herokuapp.com",
+//     httpOnly: true
+//   }
+// }));
 
 app.use('/', indexRouter);
 app.use('/account', accountRouter);
