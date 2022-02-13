@@ -106,7 +106,7 @@ router.post("/login", (req, res, next) => {
                 secure: true,
                 httpOnly: false,
                 path: '/',
-                sameSite: "none",
+                sameSite: "lax",
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
               })              
               .cookie('user', user.username, {
@@ -114,7 +114,7 @@ router.post("/login", (req, res, next) => {
                 secure: true,
                 httpOnly: false,
                 path: '/',
-                sameSite: "none",
+                sameSite: "lax",
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
               });
             
