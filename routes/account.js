@@ -105,7 +105,7 @@ router.post("/login", (req, res, next) => {
                 httpOnly: true,
                 path: '/',
                 secure: true,
-                sameSite: "none",
+                sameSite: "None",
                 domain: "tasty-tv-frontend.herokuapp.com",
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
               })              
@@ -113,7 +113,7 @@ router.post("/login", (req, res, next) => {
                 httpOnly: true,
                 path: '/',
                 secure: true,
-                sameSite: "none",
+                sameSite: "None",
                 domain: "tasty-tv-frontend.herokuapp.com",
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
               });
@@ -121,8 +121,8 @@ router.post("/login", (req, res, next) => {
             // return res.redirect('/account/welcome');
 
             }
-            catch (e){
-              return res.json({error: e})
+            catch (err){
+              return res.json({error: err})
             }
             
 
