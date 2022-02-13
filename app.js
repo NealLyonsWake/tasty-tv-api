@@ -19,7 +19,7 @@ const accountRouter = require('./routes/account');
 const watchRouter = require('./routes/watch');
 const reviewRouter = require('./routes/reviews')
 const commentRouter = require('./routes/comments');
-
+n
 const app = express();
 
 
@@ -44,12 +44,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  resave: false,
+  name: "tv_session",
   secret: process.env.SECRETCOOKIE,
+  resave: false,
   saveUninitialized: false,
   proxy: true,
   cookie: {
+    path: "/",
     secure: true,
+    //domain: ".herokuapp.com", REMOVE THIS HELPED ME (I dont use a domain anymore)
+    httpOnly: true
   }
 }));
 
