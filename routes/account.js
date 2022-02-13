@@ -104,14 +104,14 @@ router.post("/login", (req, res, next) => {
                     httpOnly: true,
                     secure: true,
                     path: '/',
-                    sameSite: 'none',
+                    sameSite: 'None',
                     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
                   })
                   .cookie('user', user.username, {
                     httpOnly: true,
                     secure: true,
                     path: '/',
-                    sameSite: 'none',
+                    sameSite: 'None',
                     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
                   });
 
