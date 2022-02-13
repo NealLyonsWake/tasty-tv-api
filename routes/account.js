@@ -72,10 +72,10 @@ router.post("/login", (req, res, next) => {
               const payload = { id: user.id };
               const token = jwt.sign(payload, jwtOptions.secretOrKey, { expiresIn: '1h' });
 
-              return res.status(202).json({ 
-                user: user,
-                token: token
-              })         
+              // return res.status(202).json({ 
+              //   user: user,
+              //   token: token
+              // })         
 
             //   const serialisedToken = serialize('token', token,
             //   {
@@ -100,9 +100,9 @@ router.post("/login", (req, res, next) => {
             // .setHeader('Set-Cookie', serialisedUser)
 
 
-              res
+              return res
               .cookie('token', token, {
-                domain: "https://tasty-tv-frontend.herokuapp.com",
+                domain: "//tasty-tv-frontend.herokuapp.com",
                 secure: false,
                 httpOnly: false,
                 path: '/',
@@ -110,7 +110,7 @@ router.post("/login", (req, res, next) => {
                 expires: new Date(new Date().getTime() + 60 * 60 * 1000)
               })              
               .cookie('user', user.username, {
-                domain: "https://tasty-tv-frontend.herokuapp.com",
+                domain: "//tasty-tv-frontend.herokuapp.com",
                 secure: false,
                 httpOnly: false,
                 path: '/',
