@@ -33,7 +33,7 @@ app.use(
   cors(
     {
       credentials: true,
-      origin: 'https://tasty-tv.netlify.app/'
+      origin: 'https://tasty-tv.netlify.app'
     }
   )
 )
