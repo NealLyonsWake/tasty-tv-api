@@ -77,46 +77,46 @@ router.post("/login", (req, res, next) => {
                 //   token: token
                 // })         
 
-                //   const serialisedToken = serialize('token', token,
-                //   {
-                //     httpOnly: true,
-                //     path: '/',
-                //     secure: true,
-                //     sameSite: "lax",
-                //     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-                //   })
-
-                //   const serialisedUser = serialize('user', user.username,
-                //   {
-                //     httpOnly: true,
-                //     path: '/',
-                //     secure: true,
-                //     sameSite: "lax",
-                //     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-                //   })
-
-                // res
-                // .setHeader('Set-Cookie', serialisedToken)
-                // .setHeader('Set-Cookie', serialisedUser)
-
-
-                res
-                  .cookie('token', token, {
-                    // domain: "tasty-tv-frontend.herokuapp.com",
-                    secure: true,
+                  const serialisedToken = serialize('token', token,
+                  {
                     httpOnly: true,
                     path: '/',
+                    secure: true,
                     sameSite: "lax",
                     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
                   })
-                  .cookie('user', user.username, {
-                    // domain: "tasty-tv-frontend.herokuapp.com",
-                    secure: true,
+
+                  const serialisedUser = serialize('user', user.username,
+                  {
                     httpOnly: true,
                     path: '/',
+                    secure: true,
                     sameSite: "lax",
                     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-                  });
+                  })
+
+                res
+                .setHeader('Set-Cookie', serialisedToken)
+                .setHeader('Set-Cookie', serialisedUser)
+
+
+                // res
+                //   .cookie('token', token, {
+                //     // domain: "tasty-tv-frontend.herokuapp.com",
+                //     secure: true,
+                //     httpOnly: true,
+                //     path: '/',
+                //     // sameSite: "lax",
+                //     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+                //   })
+                //   .cookie('user', user.username, {
+                //     // domain: "tasty-tv-frontend.herokuapp.com",
+                //     secure: true,
+                //     httpOnly: true,
+                //     path: '/',
+                //     // sameSite: "lax",
+                //     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+                //   });
 
                 // return res.redirect('/account/welcome');
 
