@@ -5,7 +5,7 @@ const router = express.Router();
 const { serialize } = require('cookie')
 const { User } = require('../models/user')
 
-let jwtOptions = { secretOrKey: process.env.SECRET } 
+let jwtOptions = { secretOrKey: process.env.SECRET }
 
 // register
 router.post('/register', (req, res) => {
@@ -48,7 +48,7 @@ router.post("/login", (req, res, next) => {
     const password = req.body.password;
 
     // authenticate
-  User.findOne({ username: username },
+    User.findOne({ username: username },
       function (err, user) {
         if (err) {
           res.status(401).json(err);
@@ -64,67 +64,67 @@ router.post("/login", (req, res, next) => {
             if (err) {
               res.status(401).json(err);
             }
-            
+
             if (user) {
 
-              try{
-              
-              const payload = { id: user.id };
-              const token = jwt.sign(payload, jwtOptions.secretOrKey, { expiresIn: '1h' });
+              try {
 
-              // return res.status(202).json({ 
-              //   user: user,
-              //   token: token
-              // })         
+                const payload = { id: user.id };
+                const token = jwt.sign(payload, jwtOptions.secretOrKey, { expiresIn: '1h' });
 
-            //   const serialisedToken = serialize('token', token,
-            //   {
-            //     httpOnly: true,
-            //     path: '/',
-            //     secure: true,
-            //     sameSite: "lax",
-            //     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-            //   })
+                // return res.status(202).json({ 
+                //   user: user,
+                //   token: token
+                // })         
 
-            //   const serialisedUser = serialize('user', user.username,
-            //   {
-            //     httpOnly: true,
-            //     path: '/',
-            //     secure: true,
-            //     sameSite: "lax",
-            //     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-            //   })
-          
-            // res
-            // .setHeader('Set-Cookie', serialisedToken)
-            // .setHeader('Set-Cookie', serialisedUser)
-        
+                //   const serialisedToken = serialize('token', token,
+                //   {
+                //     httpOnly: true,
+                //     path: '/',
+                //     secure: true,
+                //     sameSite: "lax",
+                //     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+                //   })
 
-              return res
-              .cookie('token', token, {
-                domain: "tasty-tv-frontend.herokuapp.com",
-                secure: true,
-                httpOnly: true,
-                path: '/',
-                sameSite: "lax",
-                expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-              })              
-              .cookie('user', user.username, {
-                domain: "tasty-tv-frontend.herokuapp.com",
-                secure: true,
-                httpOnly: true,
-                path: '/',
-                sameSite: "lax",
-                expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-              });
-            
-            // return res.redirect('/account/welcome');
+                //   const serialisedUser = serialize('user', user.username,
+                //   {
+                //     httpOnly: true,
+                //     path: '/',
+                //     secure: true,
+                //     sameSite: "lax",
+                //     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+                //   })
 
-            }
-            catch (err){
-              return res.json({error: err})
-            }
-            
+                // res
+                // .setHeader('Set-Cookie', serialisedToken)
+                // .setHeader('Set-Cookie', serialisedUser)
+
+
+                res
+                  .cookie('token', token, {
+                    // domain: "tasty-tv-frontend.herokuapp.com",
+                    secure: true,
+                    httpOnly: true,
+                    path: '/',
+                    sameSite: "lax",
+                    expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+                  })
+                  .cookie('user', user.username, {
+                    // domain: "tasty-tv-frontend.herokuapp.com",
+                    secure: true,
+                    httpOnly: true,
+                    path: '/',
+                    sameSite: "lax",
+                    expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+                  });
+
+                // return res.redirect('/account/welcome');
+
+              }
+              catch (err) {
+                return res.json({ error: err })
+              }
+
 
             } else {
               res.status(401).json({
@@ -138,25 +138,26 @@ router.post("/login", (req, res, next) => {
       message: "Missing username or password."
     });
   }
-  
+
 });
 
 router.get("/welcome", (req, res) => {
-  
+
   const { cookies } = req
   const jwt = cookies.token
-  const user = cookies.user  
+  const user = cookies.user
   console.log(user)
 
-  return res.status(202).json({ 
+  return res.status(202).json({
     user: user,
-    loggedIn: jwt? true : false})
+    loggedIn: jwt ? true : false
+  })
 })
 
 
-router.get('/signout', (req, res) =>{
+router.get('/signout', (req, res) => {
   res.status(202).clearCookie('token')
-  res.status(202).clearCookie('user').json({ message: 'Cookie deleted.' , loggedIn: false });
+  res.status(202).clearCookie('user').json({ message: 'Cookie deleted.', loggedIn: false });
 });
 
 
