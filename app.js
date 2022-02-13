@@ -52,7 +52,7 @@ app.use(session({
   cookie: {
     path: "/",
     secure: true,
-    domain: ".app.herokuapp.com",
+    domain: "tasty-tv-frontend.herokuapp.com",
     httpOnly: true
   }
 }));
