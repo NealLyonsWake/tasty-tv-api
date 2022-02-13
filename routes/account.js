@@ -100,23 +100,26 @@ router.post("/login", (req, res, next) => {
             // .setHeader('Set-Cookie', serialisedUser)
 
 
-              return res
-              .cookie('token', token, {
-                domain: "//tasty-tv-frontend.herokuapp.com",
-                secure: false,
-                httpOnly: false,
-                path: '/',
-                sameSite: "lax",
-                expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-              })              
-              .cookie('user', user.username, {
-                domain: "//tasty-tv-frontend.herokuapp.com",
-                secure: false,
-                httpOnly: false,
-                path: '/',
-                sameSite: "lax",
-                expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-              });
+            return res.cookie('token', token)
+        
+
+              // return res
+              // .cookie('token', token, {
+              //   domain: "//tasty-tv-frontend.herokuapp.com",
+              //   secure: false,
+              //   httpOnly: false,
+              //   path: '/',
+              //   sameSite: "lax",
+              //   expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+              // })              
+              // .cookie('user', user.username, {
+              //   domain: "//tasty-tv-frontend.herokuapp.com",
+              //   secure: false,
+              //   httpOnly: false,
+              //   path: '/',
+              //   sameSite: "lax",
+              //   expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+              // });
             
             // return res.redirect('/account/welcome');
 
