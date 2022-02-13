@@ -117,7 +117,7 @@ router.post("/login", (req, res, next) => {
                     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
                   });
 
-                // return res.redirect('/account/welcome');
+                res.redirect('/account/welcome');
 
               }
               catch (err) {
