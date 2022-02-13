@@ -71,11 +71,11 @@ router.post("/login", (req, res, next) => {
 
                 const payload = { id: user.id };
                 const token = jwt.sign(payload, jwtOptions.secretOrKey, { expiresIn: '1h' });
-
-                // return res.status(202).json({ 
-                //   user: user,
-                //   token: token
-                // })         
+                
+                return res.status(202).json({ 
+                  user: user.username,
+                  token: token
+                })         
 
                 //   const serialisedToken = serialize('token', token,
                 //   {
@@ -100,22 +100,22 @@ router.post("/login", (req, res, next) => {
                 // .setHeader('Set-Cookie', serialisedUser)
 
 
-                res.cookie('token', token, {
-                    httpOnly: true,
-                    secure: true,
-                    path: '/',
-                    sameSite: 'None',
-                    expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-                  })
-                  .cookie('user', user.username, {
-                    httpOnly: true,
-                    secure: true,
-                    path: '/',
-                    sameSite: 'None',
-                    expires: new Date(new Date().getTime() + 60 * 60 * 1000)
-                  });
+                // res.cookie('token', token, {
+                //     httpOnly: true,
+                //     secure: true,
+                //     path: '/',
+                //     sameSite: 'None',
+                //     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+                //   })
+                //   .cookie('user', user.username, {
+                //     httpOnly: true,
+                //     secure: true,
+                //     path: '/',
+                //     sameSite: 'None',
+                //     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
+                //   });
 
-                res.redirect('/account/welcome');
+                // res.redirect('/account/welcome');
 
               }
               catch (err) {
