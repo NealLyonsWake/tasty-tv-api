@@ -103,7 +103,7 @@ router.post("/login", (req, res, next) => {
               return res
               .cookie('token', token, {
                 domain: "tasty-tv-frontend.herokuapp.com",
-                secure: false,
+                secure: true,
                 httpOnly: false,
                 path: '/',
                 sameSite: "lax",
@@ -111,7 +111,7 @@ router.post("/login", (req, res, next) => {
               })              
               .cookie('user', user.username, {
                 domain: "tasty-tv-frontend.herokuapp.com",
-                secure: false,
+                secure: true,
                 httpOnly: false,
                 path: '/',
                 sameSite: "lax",
