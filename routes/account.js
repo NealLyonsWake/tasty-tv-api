@@ -106,7 +106,7 @@ router.post("/login", (req, res, next) => {
                     path: '/',
                     secure: true,
                     sameSite: "none",
-                    // domain: "tasty-tv-frontend.herokuapp.com",
+                    domain: "tasty-tv.netlify.app",
                     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
                   })
                   .cookie('user', username, {
@@ -114,7 +114,7 @@ router.post("/login", (req, res, next) => {
                     path: '/',
                     secure: true,
                     sameSite: "none",
-                    // domain: "tasty-tv-frontend.herokuapp.com",
+                    domain: "tasty-tv.netlify.app",
                     expires: new Date(new Date().getTime() + 60 * 60 * 1000)
                   });
 
@@ -147,8 +147,7 @@ router.get("/welcome", (req, res) => {
   const { cookies } = req
   const jwt = cookies.token
   const user = cookies.user
-  console.log(req)
-
+  
   return res.status(202).json({
     user: user,
     loggedIn: jwt ? true : false
