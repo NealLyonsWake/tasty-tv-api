@@ -43,17 +43,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-  name: "tv_session",
-  secret: process.env.SECRETCOOKIE,
-  resave: false,
-  saveUninitialized: false,
-  proxy: true,
-  cookie: {
-    path: "/",
-    secure: true  
-    }
-}));
+// app.use(session({
+//   name: "tv_session",
+//   secret: process.env.SECRETCOOKIE,
+//   resave: false,
+//   saveUninitialized: false,
+//   proxy: true,
+//   cookie: {
+//     path: "/",
+//     secure: true  
+//     }
+// }));
 
 app.use('/', indexRouter);
 app.use('/account', accountRouter);
