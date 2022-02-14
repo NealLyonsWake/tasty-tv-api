@@ -27,22 +27,25 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.set('trust proxy', 1)
+// app.set('trust proxy', 1)
 
-app.use(
-  cors(
-    {
-      credentials: true,
-      origin: 'https://tasty-tv.netlify.app'
-    }
-  )
-)
+
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(
+  cors(
+    {
+      origin: 'https://tasty-tv.netlify.app',
+      credentials: true
+    }
+  )
+)
+
 // app.use(session({
 //   name: "tv_session",
 //   secret: process.env.SECRETCOOKIE,
